@@ -1,0 +1,36 @@
+
+cat << 'EOF' > ~/.cursorrules
+cat << 'EOF' > ~/.cursorrules
+# Cursor AI Rules - 最強開発設定
+
+## 開発方針
+- TypeScript strict mode必須
+- エラーハンドリング comprehensive
+- コメントは日本語でOK
+- テスト駆動開発推奨
+
+## コード品質
+- ESLint/Prettier準拠
+- 関数は単一責任
+- 変数名は descriptive
+- マジックナンバー禁止
+
+## AI支援設定
+- コード生成時は説明も含める
+- セキュリティを最優先
+- パフォーマンスを考慮
+- 保守性を重視
+
+## プロジェクト構造
+src/
+├── components/     # React components
+├── utils/         # Utility functions
+├── types/         # TypeScript types
+├── hooks/         # Custom hooks
+└── services/      # API services
+
+## 推奨ライブラリ
+- UI: TailwindCSS
+- State: Zustand
+- HTTP: Axios
+- Testing: Vitest
