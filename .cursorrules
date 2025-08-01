@@ -1,6 +1,3 @@
-
-cat << 'EOF' > ~/.cursorrules
-cat << 'EOF' > ~/.cursorrules
 # Cursor AI Rules - 最強開発設定
 
 ## 開発方針
@@ -33,4 +30,4 @@ src/
 - UI: TailwindCSS
 - State: Zustand
 - HTTP: Axios
-- Testing: Vitest
+- Testing: Vitest 
