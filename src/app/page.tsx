@@ -283,6 +283,34 @@ const AICreativeStudio = () => {
       <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
       
+      {/* パーティクル効果 */}
+      <div className="absolute inset-0 pointer-events-none">
+        {Array.from({length: 20}, (_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-cyan-400/30 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 2}s`
+            }}
+          />
+        ))}
+        {Array.from({length: 15}, (_, i) => (
+          <div
+            key={`small-${i}`}
+            className="absolute w-1 h-1 bg-blue-400/40 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 4}s`,
+              animationDuration: `${3 + Math.random() * 2}s`
+            }}
+          />
+        ))}
+      </div>
+      
       {/* ヘッダー */}
       <header className="relative">
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/10 to-blue-600/10 backdrop-blur-sm"></div>
@@ -300,15 +328,17 @@ const AICreativeStudio = () => {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="px-8 py-4 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-teal-500/20 backdrop-blur-2xl border border-cyan-400/30 rounded-3xl animate-pulse shadow-2xl hover:shadow-cyan-500/25 transition-all duration-500">
-                <div className="flex items-center space-x-3">
-                  <span className="text-2xl">✨</span>
-                  <div>
-                    <div className="text-cyan-100 text-sm font-bold">技術プレビュー版</div>
-                    <div className="text-cyan-200/80 text-xs">AI技術実装中</div>
-                  </div>
+                          <div className="px-8 py-4 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-teal-500/20 backdrop-blur-2xl border border-cyan-400/30 rounded-3xl animate-pulse shadow-2xl hover:shadow-cyan-500/25 transition-all duration-500 relative overflow-hidden group">
+              {/* ガラス反射効果 */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+              <div className="relative z-10 flex items-center space-x-3">
+                <span className="text-2xl animate-pulse">✨</span>
+                <div>
+                  <div className="text-cyan-100 text-sm font-bold drop-shadow-lg">技術プレビュー版</div>
+                  <div className="text-cyan-200/80 text-xs">AI技術実装中</div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </div>
@@ -318,9 +348,13 @@ const AICreativeStudio = () => {
         <div className="grid lg:grid-cols-12 gap-8">
           {/* メインコントロールパネル */}
           <div className="lg:col-span-4">
-            <div className="bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500">
+            <div className="bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 relative overflow-hidden group hover:translate-y-[-2px] hover:scale-[1.02]">
+              {/* ガラス反射効果 */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+              {/* グロー効果 */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 via-blue-400/5 to-teal-400/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               {/* フローティングガラスタブ */}
-              <div className="flex space-x-3 mb-8 p-2 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10">
+              <div className="flex space-x-3 mb-8 p-2 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 relative z-10 hover:translate-y-[-1px] transition-all duration-300">
                 <button
                   onClick={() => setActiveTab('generate')}
                   className={`flex-1 py-4 px-6 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${
@@ -459,9 +493,13 @@ const AICreativeStudio = () => {
             </div>
 
             {/* 高度な設定 */}
-            <div className="mt-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500">
-              <h3 className="text-cyan-100 font-semibold mb-6 flex items-center text-lg">
-                <Palette className="w-6 h-6 mr-3" />
+            <div className="mt-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 relative overflow-hidden group hover:translate-y-[-2px] hover:scale-[1.02]">
+              {/* ガラス反射効果 */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+              {/* グロー効果 */}
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 via-blue-400/5 to-teal-400/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+              <h3 className="text-cyan-100 font-semibold mb-6 flex items-center text-lg relative z-10">
+                <Palette className="w-6 h-6 mr-3 drop-shadow-lg" />
                 高度な設定
               </h3>
               
@@ -505,13 +543,17 @@ const AICreativeStudio = () => {
           <div className="lg:col-span-8">
             <div className="grid gap-8">
               {/* 画像結果 */}
-              <div className="bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500">
-                <h3 className="text-cyan-100 font-semibold mb-6 flex items-center text-xl">
-                  <Image className="w-6 h-6 mr-3" />
+              <div className="bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 relative overflow-hidden group hover:translate-y-[-2px] hover:scale-[1.02]">
+                {/* ガラス反射効果 */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                {/* グロー効果 */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 via-blue-400/5 to-teal-400/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                <h3 className="text-cyan-100 font-semibold mb-6 flex items-center text-xl relative z-10">
+                  <Image className="w-6 h-6 mr-3 drop-shadow-lg" />
                   生成画像
                 </h3>
                 
-                <div className="aspect-square bg-white/5 backdrop-blur-xl rounded-2xl border-2 border-dashed border-white/20 flex items-center justify-center">
+                <div className="aspect-square bg-white/5 backdrop-blur-xl rounded-2xl border-2 border-dashed border-white/20 flex items-center justify-center relative z-10 hover:scale-[1.02] transition-all duration-300">
                   {generatedImage ? (
                     <div className="relative w-full h-full">
                       <div className="w-full h-full bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl">
@@ -557,13 +599,17 @@ const AICreativeStudio = () => {
               </div>
 
               {/* 音楽プレイヤー */}
-              <div className="bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500">
-                <h3 className="text-cyan-100 font-semibold mb-6 flex items-center text-xl">
-                  <Music className="w-6 h-6 mr-3" />
+              <div className="bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 relative overflow-hidden group hover:translate-y-[-2px] hover:scale-[1.02]">
+                {/* ガラス反射効果 */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                {/* グロー効果 */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 via-blue-400/5 to-teal-400/5 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                <h3 className="text-cyan-100 font-semibold mb-6 flex items-center text-xl relative z-10">
+                  <Music className="w-6 h-6 mr-3 drop-shadow-lg" />
                   生成音楽
                 </h3>
                 
-                <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
+                <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20 relative z-10 hover:scale-[1.01] transition-all duration-300">
                   {generatedMusic ? (
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
@@ -591,13 +637,15 @@ const AICreativeStudio = () => {
                       <div className="flex items-center space-x-6">
                         <button
                           onClick={togglePlayback}
-                          className="w-14 h-14 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 rounded-full flex items-center justify-center transition-all duration-300 shadow-xl hover:shadow-cyan-500/25 transform hover:scale-105"
+                          className="w-14 h-14 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 rounded-full flex items-center justify-center transition-all duration-300 shadow-xl hover:shadow-cyan-500/25 transform hover:scale-105 relative overflow-hidden group"
                         >
-                          {isPlaying ? (
-                            <Pause className="w-6 h-6 text-white" />
-                          ) : (
-                            <Play className="w-6 h-6 text-white ml-1" />
-                          )}
+                          {/* ガラス反射効果 */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500"></div>
+                                                      {isPlaying ? (
+                              <Pause className="w-6 h-6 text-white relative z-10 drop-shadow-lg" />
+                            ) : (
+                              <Play className="w-6 h-6 text-white ml-1 relative z-10 drop-shadow-lg" />
+                            )}
                         </button>
                         
                         <div className="flex-1">
@@ -618,7 +666,7 @@ const AICreativeStudio = () => {
                         {generatedMusic.waveform?.slice(0, 32).map((amplitude, i) => (
                           <div
                             key={i}
-                            className="bg-gradient-to-t from-cyan-400/80 to-blue-500/80 rounded-md transition-all duration-300 shadow-lg"
+                            className="bg-gradient-to-t from-cyan-400/80 to-blue-500/80 rounded-md transition-all duration-300 shadow-lg hover:scale-y-110 hover:shadow-cyan-500/50"
                             style={{
                               height: `${amplitude * 40 + 12}px`,
                               animationDelay: `${i * 0.1}s`
@@ -627,7 +675,7 @@ const AICreativeStudio = () => {
                         )) || Array.from({length: 32}, (_, i) => (
                           <div
                             key={i}
-                            className="bg-gradient-to-t from-cyan-400/80 to-blue-500/80 rounded-md shadow-lg"
+                            className="bg-gradient-to-t from-cyan-400/80 to-blue-500/80 rounded-md shadow-lg hover:scale-y-110 hover:shadow-cyan-500/50"
                             style={{
                               height: `${Math.random() * 40 + 12}px`,
                               animationDelay: `${i * 0.1}s`
@@ -697,11 +745,15 @@ const AICreativeStudio = () => {
           setIsFeedbackModalOpen(true);
           trackEngagement('feedback_button_clicked', 1);
         }}
-        className="fixed bottom-8 right-8 w-18 h-18 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white rounded-full shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 transform hover:scale-110 z-40 backdrop-blur-xl border border-white/20"
+        className="fixed bottom-8 right-8 w-18 h-18 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white rounded-full shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 transform hover:scale-110 z-40 backdrop-blur-xl border border-white/20 relative overflow-hidden group"
         aria-label="フィードバックを送信"
       >
-        <div className="relative">
-          <span className="text-3xl">💬</span>
+        {/* ガラス反射効果 */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500"></div>
+        {/* グロー効果 */}
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-full blur-lg group-hover:blur-xl transition-all duration-300"></div>
+        <div className="relative z-10">
+          <span className="text-3xl drop-shadow-lg">💬</span>
           <div className="absolute -top-2 -right-2 w-4 h-4 bg-red-400 rounded-full animate-pulse shadow-lg"></div>
         </div>
       </button>
