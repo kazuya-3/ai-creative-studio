@@ -31,7 +31,7 @@ const Wand2 = (props) => <Icon name="wand" {...props} />;
 const Play = (props) => <Icon name="play" {...props} />;
 const Pause = (props) => <Icon name="pause" {...props} />;
 const Download = (props) => <Icon name="download" {...props} />;
-const Upload = (props) => <Icon name="upload" {...props} />;
+// const Upload = (props) => <Icon name="upload" {...props} />;
 const Palette = (props) => <Icon name="palette" {...props} />;
 const Volume2 = (props) => <Icon name="volume" {...props} />;
 

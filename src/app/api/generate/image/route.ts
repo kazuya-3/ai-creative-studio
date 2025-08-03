@@ -120,7 +120,12 @@ function enhancePrompt(prompt: string, style: string): string {
 }
 
 // モック画像URL生成（開発用）
-function generateMockImageUrl(params: any): string {
+function generateMockImageUrl(params: {
+  size: string;
+  style: string;
+  creativityLevel: number;
+  qualityLevel: number;
+}): string {
   const colors = ['purple', 'blue', 'green', 'red', 'orange'];
   const color = colors[Math.floor(Math.random() * colors.length)];
   const [width, height] = params.size.split('x');

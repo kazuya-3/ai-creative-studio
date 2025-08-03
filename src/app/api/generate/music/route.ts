@@ -112,7 +112,7 @@ async function generateMusicWithKaggleAI(params: {
 }
 
 // 音楽タイトル生成
-function generateMusicTitle(genre: string, mood: string): string {
+function generateMusicTitle(genre: string, _mood: string): string {
   const genreTitles = {
     ambient: ['Floating Dreams', 'Ethereal Waves', 'Cosmic Silence'],
     electronic: ['Digital Pulse', 'Cyber Rhythm', 'Neon Beats'],
@@ -144,7 +144,12 @@ function generateMockWaveform(duration: number): number[] {
 }
 
 // モック音楽URL生成（開発用）
-function generateMockMusicUrl(params: any): string {
+function generateMockMusicUrl(params: {
+  genre: string;
+  duration: number;
+  tempo: number;
+  mood: string;
+}): string {
   // 実際はKaggleで生成した音楽ファイルのURL
   // 現在は開発用のプレースホルダー
   return `/api/audio/mock-${params.genre}-${Date.now()}.mp3`;

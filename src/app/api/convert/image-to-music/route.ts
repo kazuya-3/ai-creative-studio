@@ -122,7 +122,13 @@ async function convertImageToMusicWithKaggleAI(params: {
 }
 
 // 画像解析（音楽生成用）
-async function analyzeImageForMusic(params: any) {
+async function analyzeImageForMusic(params: {
+  imageUrl?: string;
+  imageFile?: string;
+  genre: string;
+  duration: number;
+  intensity: number;
+}) {
   // Kaggleで開発した画像解析技術
   // 実際の実装では、色彩分析、エッジ検出、テクスチャ解析など
   
@@ -139,7 +145,17 @@ async function analyzeImageForMusic(params: any) {
 }
 
 // 画像分析結果を音楽パラメータに変換
-function convertImageAnalysisToMusicParams(analysis: any, params: any) {
+function convertImageAnalysisToMusicParams(analysis: {
+  dominantColors: string[];
+  mood: string;
+  brightness: number;
+  complexity: number;
+  emotions: string[];
+}, params: {
+  genre: string;
+  duration: number;
+  intensity: number;
+}) {
   // Kaggleで開発した独自のマッピング技術
   
   return {
@@ -153,7 +169,14 @@ function convertImageAnalysisToMusicParams(analysis: any, params: any) {
 }
 
 // 分析結果から音楽生成
-async function generateMusicFromAnalysis(musicParams: any) {
+async function generateMusicFromAnalysis(musicParams: {
+  tempo: number;
+  key: string;
+  intensity: number;
+  genre: string;
+  mood: string;
+  duration: number;
+}) {
   // 音楽生成のシミュレーション
   const title = generateTitleFromAnalysis(musicParams);
   const waveform = generateAdvancedWaveform(musicParams);
@@ -196,7 +219,14 @@ function mapComplexityToIntensity(complexity: number): number {
   return Math.floor(complexity);
 }
 
-function generateTitleFromAnalysis(params: any): string {
+function generateTitleFromAnalysis(params: {
+  tempo: number;
+  key: string;
+  intensity: number;
+  genre: string;
+  mood: string;
+  duration: number;
+}): string {
   const moodTitles = {
     peaceful: 'Serene Vision',
     energetic: 'Dynamic Colors',
@@ -209,7 +239,14 @@ function generateTitleFromAnalysis(params: any): string {
   return `${baseTitle} in ${params.key}`;
 }
 
-function generateAdvancedWaveform(params: any): number[] {
+function generateAdvancedWaveform(params: {
+  tempo: number;
+  key: string;
+  intensity: number;
+  genre: string;
+  mood: string;
+  duration: number;
+}): number[] {
   const sampleCount = params.duration * 15; // 15サンプル/秒（高解像度）
   const waveform: number[] = [];
   
@@ -228,6 +265,13 @@ function generateAdvancedWaveform(params: any): number[] {
   return waveform;
 }
 
-function generateMusicUrl(params: any): string {
+function generateMusicUrl(params: {
+  tempo: number;
+  key: string;
+  intensity: number;
+  genre: string;
+  mood: string;
+  duration: number;
+}): string {
   return `/api/audio/image2music-${params.mood}-${Date.now()}.mp3`;
 }
