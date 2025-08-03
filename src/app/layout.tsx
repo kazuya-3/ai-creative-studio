@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { initGA } from "@/utils/analytics";
+import { setupGlobalErrorHandler } from "@/utils/errorTracking";
 
 // フォントの設定を最適化
 const geistSans = Geist({
@@ -95,6 +97,19 @@ export default function RootLayout({
                   return false;
                 }
               });
+
+              // Google Analytics 4初期化
+              if (typeof window !== 'undefined') {
+                window.dataLayer = window.dataLayer || [];
+                window.gtag = function() {
+                  window.dataLayer.push(arguments);
+                };
+                window.gtag('js', new Date());
+                window.gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                  page_title: 'AI Creative Studio',
+                  page_location: window.location.href,
+                });
+              }
             `,
           }}
         />

@@ -1,5 +1,8 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import FeedbackModal from '@/components/FeedbackModal';
+import { trackAIGeneration, trackEngagement, trackPageView } from '@/utils/analytics';
+import { setupGlobalErrorHandler, handleAPIError } from '@/utils/errorTracking';
 
 // アイコンコンポーネント（lucide-react代替）
 interface IconProps {
@@ -51,6 +54,7 @@ const AICreativeStudio = () => {
   const [generatedImage, setGeneratedImage] = useState(null);
   const [generatedMusic, setGeneratedMusic] = useState(null);
   const [imageAnalysis, setImageAnalysis] = useState(null);
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
   
   // フォーム状態
   const [prompt, setPrompt] = useState('');
@@ -165,10 +169,26 @@ const AICreativeStudio = () => {
         handleMusicGeneration();
       }
     }
+    
+    // 生成イベント追跡
+    trackEngagement('ai_generation_started', 1);
   };
+
+  // 初期化
+  useEffect(() => {
+    // ページビュー追跡
+    trackPageView(window.location.pathname);
+    
+    // エラーハンドラー設定
+    setupGlobalErrorHandler();
+    
+    // エンゲージメント追跡
+    trackEngagement('page_view', 1);
+  }, []);
 
   const togglePlayback = () => {
     setIsPlaying(!isPlaying);
+    trackEngagement('music_playback_toggle', 1);
   };
 
   return (
@@ -515,6 +535,21 @@ const AICreativeStudio = () => {
           </div>
         </div>
       </footer>
+
+      {/* フィードバックボタン */}
+      <button
+        onClick={() => setIsFeedbackModalOpen(true)}
+        className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-40"
+        aria-label="フィードバックを送信"
+      >
+        <span className="text-2xl">💬</span>
+      </button>
+
+      {/* フィードバックモーダル */}
+      <FeedbackModal
+        isOpen={isFeedbackModalOpen}
+        onClose={() => setIsFeedbackModalOpen(false)}
+      />
     </div>
   );
 };
