@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { initGA } from "@/utils/analytics";
 import { setupGlobalErrorHandler } from "@/utils/errorTracking";
 
@@ -98,27 +99,9 @@ export default function RootLayout({
                 }
               });
 
-              // Google Analytics 4初期化
-              if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
-                window.dataLayer = window.dataLayer || [];
-                window.gtag = function() {
-                  window.dataLayer.push(arguments);
-                };
-                window.gtag('js', new Date());
-                
-                // GA4設定
-                const gaId = '${process.env.NEXT_PUBLIC_GA_ID}';
-                if (gaId && gaId !== 'undefined') {
-                  window.gtag('config', gaId, {
-                    page_title: 'AI Creative Studio',
-                    page_location: window.location.href,
-                    custom_map: {
-                      'custom_parameter_1': 'ai_generation_type',
-                      'custom_parameter_2': 'generation_time',
-                      'custom_parameter_3': 'user_rating'
-                    }
-                  });
-                }
+              // エラーハンドリング（Google Analyticsは@next/third-partiesで管理）
+              if (typeof window !== 'undefined') {
+                // 追加のカスタム設定があればここに記述
               }
             `,
           }}
@@ -128,6 +111,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   );
