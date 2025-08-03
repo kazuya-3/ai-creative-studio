@@ -77,6 +77,102 @@ export const trackAIGeneration = (
   }
 };
 
+// 画像生成イベント追跡
+export const trackImageGeneration = (
+  prompt: string,
+  style: string,
+  size: string,
+  creativityLevel: number,
+  qualityLevel: number,
+  generationTime?: number
+) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'image_generation', {
+      event_category: 'ai_creative',
+      event_label: 'image_generation',
+      value: 1,
+      custom_parameters: {
+        prompt_length: prompt.length,
+        prompt_preview: prompt.substring(0, 50) + (prompt.length > 50 ? '...' : ''),
+        style: style,
+        size: size,
+        creativity_level: creativityLevel,
+        quality_level: qualityLevel,
+        generation_time_ms: generationTime || 0,
+        model: 'KaggleAI-StableDiffusion-v2',
+        timestamp: new Date().toISOString(),
+      },
+    });
+  }
+};
+
+// 音楽生成イベント追跡
+export const trackMusicGeneration = (
+  prompt: string,
+  genre: string,
+  duration: number,
+  tempo: number,
+  mood: string,
+  generationTime?: number
+) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'music_generation', {
+      event_category: 'ai_creative',
+      event_label: 'music_generation',
+      value: 1,
+      custom_parameters: {
+        prompt_length: prompt.length,
+        prompt_preview: prompt.substring(0, 50) + (prompt.length > 50 ? '...' : ''),
+        genre: genre,
+        duration_seconds: duration,
+        tempo_bpm: tempo,
+        mood: mood,
+        generation_time_ms: generationTime || 0,
+        model: 'KaggleAI-MusicGen-v1',
+        timestamp: new Date().toISOString(),
+      },
+    });
+  }
+};
+
+// 画像→音楽変換イベント追跡
+export const trackImageToMusicConversion = (
+  imageUrl: string,
+  genre: string,
+  duration: number,
+  intensity: number,
+  imageAnalysis?: {
+    dominantColors: string[];
+    mood: string;
+    brightness: number;
+    complexity: number;
+    emotions: string[];
+  },
+  generationTime?: number
+) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'image_to_music_conversion', {
+      event_category: 'ai_creative',
+      event_label: 'image_to_music_conversion',
+      value: 1,
+      custom_parameters: {
+        image_url: imageUrl,
+        genre: genre,
+        duration_seconds: duration,
+        intensity_level: intensity,
+        image_mood: imageAnalysis?.mood || 'unknown',
+        image_brightness: imageAnalysis?.brightness || 0,
+        image_complexity: imageAnalysis?.complexity || 0,
+        dominant_colors_count: imageAnalysis?.dominantColors?.length || 0,
+        emotions: imageAnalysis?.emotions?.join(', ') || 'none',
+        generation_time_ms: generationTime || 0,
+        model: 'KaggleAI-Image2Music-v1',
+        timestamp: new Date().toISOString(),
+      },
+    });
+  }
+};
+
 // フィードバックイベント追跡
 export const trackFeedback = (rating: number, hasComment: boolean) => {
   trackEvent('feedback_submitted', 'user_feedback', `rating_${rating}`, rating);

@@ -1,7 +1,14 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import FeedbackModal from '@/components/FeedbackModal';
-import { trackAIGeneration, trackEngagement, trackPageView } from '@/utils/analytics';
+import { 
+  trackAIGeneration, 
+  trackEngagement, 
+  trackPageView,
+  trackImageGeneration,
+  trackMusicGeneration,
+  trackImageToMusicConversion
+} from '@/utils/analytics';
 import { setupGlobalErrorHandler, handleAPIError } from '@/utils/errorTracking';
 
 // アイコンコンポーネント（lucide-react代替）
@@ -72,6 +79,8 @@ const AICreativeStudio = () => {
     }
 
     setIsGenerating(true);
+    const startTime = Date.now();
+    
     try {
       const response = await fetch('/api/generate/image', {
         method: 'POST',
@@ -89,11 +98,25 @@ const AICreativeStudio = () => {
       
       if (result.success) {
         setGeneratedImage(result);
+        
+        // 画像生成イベント追跡
+        const generationTime = Date.now() - startTime;
+        trackImageGeneration(
+          prompt,
+          style,
+          size,
+          creativityLevel,
+          qualityLevel,
+          generationTime
+        );
       } else {
         alert('画像生成エラー: ' + result.error);
+        handleAPIError(result.error, 'image_generation');
       }
     } catch (error) {
-      alert('API呼び出しエラー: ' + error.message);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      alert('API呼び出しエラー: ' + errorMessage);
+      handleAPIError(error, 'image_generation');
     } finally {
       setIsGenerating(false);
     }
@@ -102,6 +125,8 @@ const AICreativeStudio = () => {
   // 音楽生成API呼び出し
   const handleMusicGeneration = async () => {
     setIsGenerating(true);
+    const startTime = Date.now();
+    
     try {
       const response = await fetch('/api/generate/music', {
         method: 'POST',
@@ -118,11 +143,25 @@ const AICreativeStudio = () => {
       
       if (result.success) {
         setGeneratedMusic(result);
+        
+        // 音楽生成イベント追跡
+        const generationTime = Date.now() - startTime;
+        trackMusicGeneration(
+          prompt || '音楽生成',
+          genre,
+          30,
+          120,
+          'neutral',
+          generationTime
+        );
       } else {
         alert('音楽生成エラー: ' + result.error);
+        handleAPIError(result.error, 'music_generation');
       }
     } catch (error) {
-      alert('API呼び出しエラー: ' + error.message);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      alert('API呼び出しエラー: ' + errorMessage);
+      handleAPIError(error, 'music_generation');
     } finally {
       setIsGenerating(false);
     }
@@ -131,6 +170,8 @@ const AICreativeStudio = () => {
   // 画像→音楽変換API呼び出し
   const handleImageToMusic = async (imageUrl: string) => {
     setIsGenerating(true);
+    const startTime = Date.now();
+    
     try {
       const response = await fetch('/api/convert/image-to-music', {
         method: 'POST',
@@ -148,11 +189,25 @@ const AICreativeStudio = () => {
       if (result.success) {
         setGeneratedMusic(result);
         setImageAnalysis(result.imageAnalysis);
+        
+        // 画像→音楽変換イベント追跡
+        const generationTime = Date.now() - startTime;
+        trackImageToMusicConversion(
+          imageUrl,
+          genre,
+          30,
+          50,
+          result.imageAnalysis,
+          generationTime
+        );
       } else {
         alert('画像→音楽変換エラー: ' + result.error);
+        handleAPIError(result.error, 'image_to_music_conversion');
       }
     } catch (error) {
-      alert('API呼び出しエラー: ' + error.message);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      alert('API呼び出しエラー: ' + errorMessage);
+      handleAPIError(error, 'image_to_music_conversion');
     } finally {
       setIsGenerating(false);
     }
