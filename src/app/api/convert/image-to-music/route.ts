@@ -146,15 +146,12 @@ async function analyzeImageForMusic(params: {
 
 // 画像分析結果を音楽パラメータに変換
 function convertImageAnalysisToMusicParams(analysis: {
-  dominantColors: string[];
-  mood: string;
   brightness: number;
+  dominantColors: string[];
   complexity: number;
-  emotions: string[];
 }, params: {
   genre: string;
   duration: number;
-  intensity: number;
 }) {
   // Kaggleで開発した独自のマッピング技術
   
@@ -219,14 +216,7 @@ function mapComplexityToIntensity(complexity: number): number {
   return Math.floor(complexity);
 }
 
-function generateTitleFromAnalysis(params: {
-  tempo: number;
-  key: string;
-  intensity: number;
-  genre: string;
-  mood: string;
-  duration: number;
-}): string {
+function generateTitleFromAnalysis(params: any): string {
   const moodTitles = {
     peaceful: 'Serene Vision',
     energetic: 'Dynamic Colors',
@@ -239,14 +229,7 @@ function generateTitleFromAnalysis(params: {
   return `${baseTitle} in ${params.key}`;
 }
 
-function generateAdvancedWaveform(params: {
-  tempo: number;
-  key: string;
-  intensity: number;
-  genre: string;
-  mood: string;
-  duration: number;
-}): number[] {
+function generateAdvancedWaveform(params: any): number[] {
   const sampleCount = params.duration * 15; // 15サンプル/秒（高解像度）
   const waveform: number[] = [];
   
@@ -265,13 +248,6 @@ function generateAdvancedWaveform(params: {
   return waveform;
 }
 
-function generateMusicUrl(params: {
-  tempo: number;
-  key: string;
-  intensity: number;
-  genre: string;
-  mood: string;
-  duration: number;
-}): string {
+function generateMusicUrl(params: any): string {
   return `/api/audio/image2music-${params.mood}-${Date.now()}.mp3`;
 }

@@ -2,8 +2,13 @@
 import React, { useState } from 'react';
 
 // アイコンコンポーネント（lucide-react代替）
-const Icon = ({ name, className = "w-5 h-5" }) => {
-  const icons = {
+interface IconProps {
+  name: string;
+  className?: string;
+}
+
+const Icon = ({ name, className = "w-5 h-5" }: IconProps) => {
+  const icons: Record<string, string> = {
     sparkles: "✨",
     image: "🖼️",
     music: "🎵",
@@ -24,16 +29,20 @@ const Icon = ({ name, className = "w-5 h-5" }) => {
 };
 
 // アイコンコンポーネントのエイリアス
-const Sparkles = (props) => <Icon name="sparkles" {...props} />;
-const Image = (props) => <Icon name="image" {...props} />;
-const Music = (props) => <Icon name="music" {...props} />;
-const Wand2 = (props) => <Icon name="wand" {...props} />;
-const Play = (props) => <Icon name="play" {...props} />;
-const Pause = (props) => <Icon name="pause" {...props} />;
-const Download = (props) => <Icon name="download" {...props} />;
-// const Upload = (props) => <Icon name="upload" {...props} />;
-const Palette = (props) => <Icon name="palette" {...props} />;
-const Volume2 = (props) => <Icon name="volume" {...props} />;
+interface IconComponentProps {
+  className?: string;
+}
+
+const Sparkles = (props: IconComponentProps) => <Icon name="sparkles" {...props} />;
+const Image = (props: IconComponentProps) => <Icon name="image" {...props} />;
+const Music = (props: IconComponentProps) => <Icon name="music" {...props} />;
+const Wand2 = (props: IconComponentProps) => <Icon name="wand" {...props} />;
+const Play = (props: IconComponentProps) => <Icon name="play" {...props} />;
+const Pause = (props: IconComponentProps) => <Icon name="pause" {...props} />;
+const Download = (props: IconComponentProps) => <Icon name="download" {...props} />;
+// const Upload = (props: IconComponentProps) => <Icon name="upload" {...props} />;
+const Palette = (props: IconComponentProps) => <Icon name="palette" {...props} />;
+const Volume2 = (props: IconComponentProps) => <Icon name="volume" {...props} />;
 
 const AICreativeStudio = () => {
   const [activeTab, setActiveTab] = useState('generate');
@@ -48,8 +57,8 @@ const AICreativeStudio = () => {
   const [style, setStyle] = useState('anime');
   const [size, setSize] = useState('512x512');
   const [genre, setGenre] = useState('ambient');
-  const [creativityLevel, setCreativityLevel] = useState(70);
-  const [qualityLevel, setQualityLevel] = useState(80);
+  const [creativityLevel, setCreativityLevel] = useState<number>(70);
+  const [qualityLevel, setQualityLevel] = useState<number>(80);
 
   // 画像生成API呼び出し
   const handleImageGeneration = async () => {
@@ -116,7 +125,7 @@ const AICreativeStudio = () => {
   };
 
   // 画像→音楽変換API呼び出し
-  const handleImageToMusic = async (imageUrl) => {
+  const handleImageToMusic = async (imageUrl: string) => {
     setIsGenerating(true);
     try {
       const response = await fetch('/api/convert/image-to-music', {
@@ -328,7 +337,7 @@ const AICreativeStudio = () => {
                     min="0" 
                     max="100" 
                     value={creativityLevel}
-                    onChange={(e) => setCreativityLevel(e.target.value)}
+                                         onChange={(e) => setCreativityLevel(Number(e.target.value))}
                     className="w-full" 
                   />
                   <div className="flex justify-between text-xs text-purple-200 mt-1">
@@ -344,7 +353,7 @@ const AICreativeStudio = () => {
                     min="0" 
                     max="100" 
                     value={qualityLevel}
-                    onChange={(e) => setQualityLevel(e.target.value)}
+                                         onChange={(e) => setQualityLevel(Number(e.target.value))}
                     className="w-full" 
                   />
                   <div className="flex justify-between text-xs text-purple-200 mt-1">
