@@ -293,8 +293,8 @@ const AICreativeStudio = () => {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="px-4 py-2 bg-green-500/20 border border-green-400/30 rounded-lg">
-                <span className="text-green-300 text-sm font-medium">β版 LIVE</span>
+              <div className="px-4 py-2 bg-yellow-500/20 border border-yellow-400/30 rounded-lg animate-pulse">
+                <span className="text-yellow-300 text-sm font-medium">🚧 技術デモ版</span>
               </div>
             </div>
           </div>
@@ -416,12 +416,12 @@ const AICreativeStudio = () => {
                 {isGenerating ? (
                   <div className="flex items-center justify-center">
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                    生成中...
+                    デモ生成中...
                   </div>
                 ) : (
                   <div className="flex items-center justify-center">
                     <Wand2 className="w-5 h-5 mr-2" />
-                    AI生成開始
+                    デモ生成開始
                   </div>
                 )}
               </button>
@@ -492,6 +492,12 @@ const AICreativeStudio = () => {
                           <div className="text-xs opacity-50 mt-1">
                             生成時間: {generatedImage.metadata?.generationTime ? (generatedImage.metadata.generationTime / 1000).toFixed(1) : 'N/A'}秒
                           </div>
+                          <div className="mt-3 px-3 py-1 bg-yellow-500/20 border border-yellow-400/30 rounded-full">
+                            <span className="text-yellow-300 text-xs font-medium">📋 デモ画像表示中</span>
+                          </div>
+                          <div className="text-xs text-yellow-200 mt-1">
+                            実際のAI生成は開発中
+                          </div>
                         </div>
                       </div>
                       <button className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors">
@@ -502,6 +508,9 @@ const AICreativeStudio = () => {
                     <div className="text-center">
                       <Image className="w-16 h-16 text-purple-300 mx-auto mb-4" />
                       <p className="text-purple-200">画像がここに表示されます</p>
+                      <div className="mt-2 px-3 py-1 bg-yellow-500/20 border border-yellow-400/30 rounded-full inline-block">
+                        <span className="text-yellow-300 text-xs font-medium">🚧 開発中</span>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -524,6 +533,12 @@ const AICreativeStudio = () => {
                           {imageAnalysis && (
                             <p className="text-xs text-purple-300 mt-1">画像から生成 • {imageAnalysis.mood}ムード</p>
                           )}
+                          <div className="mt-2 px-3 py-1 bg-yellow-500/20 border border-yellow-400/30 rounded-full inline-block">
+                            <span className="text-yellow-300 text-xs font-medium">🎵 デモプレイヤー</span>
+                          </div>
+                          <div className="text-xs text-yellow-200 mt-1">
+                            実際のAI音楽生成は近日実装予定
+                          </div>
                         </div>
                         <button className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors">
                           <Download className="w-4 h-4 text-white" />
@@ -582,6 +597,9 @@ const AICreativeStudio = () => {
                     <div className="text-center py-8">
                       <Music className="w-16 h-16 text-purple-300 mx-auto mb-4" />
                       <p className="text-purple-200">音楽がここに表示されます</p>
+                      <div className="mt-2 px-3 py-1 bg-yellow-500/20 border border-yellow-400/30 rounded-full inline-block">
+                        <span className="text-yellow-300 text-xs font-medium">🚧 開発中</span>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -599,22 +617,22 @@ const AICreativeStudio = () => {
               <div className="text-2xl font-bold text-white mb-1">
                 {generatedImage ? '1' : '0'}
               </div>
-              <div className="text-purple-200 text-sm">生成画像数</div>
+              <div className="text-purple-200 text-sm">デモ画像数</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-white mb-1">
                 {generatedMusic ? '1' : '0'}
               </div>
-              <div className="text-purple-200 text-sm">生成音楽数</div>
+              <div className="text-purple-200 text-sm">デモ音楽数</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-white mb-1">
-                {isGenerating ? '生成中' : '待機中'}
+                {isGenerating ? 'デモ中' : '待機中'}
               </div>
               <div className="text-purple-200 text-sm">システム状態</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-white mb-1">β版</div>
+              <div className="text-2xl font-bold text-white mb-1">技術デモ</div>
               <div className="text-purple-200 text-sm">バージョン</div>
             </div>
           </div>
