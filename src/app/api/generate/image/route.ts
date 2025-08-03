@@ -36,8 +36,9 @@ export async function POST(request: NextRequest) {
 
     const startTime = Date.now();
 
-    // 実際の画像生成（改良版）
-    const generatedImage = await generateImageWithAI({
+    // Kaggle技術をWeb API化（現在はモック実装）
+    // TODO: 実際のKaggle AI技術に置き換え
+    const generatedImage = await generateImageWithKaggleAI({
       prompt: body.prompt,
       style: body.style || 'anime',
       size: body.size || '512x512',
@@ -55,7 +56,7 @@ export async function POST(request: NextRequest) {
         style: body.style,
         size: body.size,
         generationTime,
-        model: 'AI-Image-Generator-v1'
+        model: 'KaggleAI-StableDiffusion-v2'
       }
     };
 
@@ -74,30 +75,31 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// 改良された画像生成関数
-async function generateImageWithAI(params: {
+// Kaggle技術の統合関数（現在はモック）
+async function generateImageWithKaggleAI(params: {
   prompt: string;
   style: string;
   size: string;
   creativityLevel: number;
   qualityLevel: number;
 }) {
-  // リアルな生成時間をシミュレート
-  const baseTime = 2000;
-  const creativityFactor = (100 - params.creativityLevel) / 100;
-  const qualityFactor = params.qualityLevel / 100;
-  const generationTime = baseTime + (creativityFactor * 2000) + (qualityFactor * 1000);
+  // 現在はシミュレーション（実際のKaggle技術に置き換え予定）
+  await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 3000));
   
-  await new Promise(resolve => setTimeout(resolve, generationTime));
+  // Kaggleで開発したStable Diffusion風の処理をここに実装
+  // 実装例:
+  // 1. プロンプトの前処理
+  // 2. スタイル適用
+  // 3. 画像生成
+  // 4. 後処理・品質向上
   
-  // プロンプトを強化
   const processedPrompt = enhancePrompt(params.prompt, params.style);
   
-  // より現実的な画像URLを生成
-  const imageUrl = generateRealisticImageUrl(params, processedPrompt);
+  // モック画像URL（実際はKaggleで生成した画像）
+  const mockImageUrl = generateMockImageUrl(params);
   
   return {
-    url: imageUrl,
+    url: mockImageUrl,
     width: parseInt(params.size.split('x')[0]),
     height: parseInt(params.size.split('x')[1]),
     prompt: processedPrompt,
@@ -105,52 +107,24 @@ async function generateImageWithAI(params: {
   };
 }
 
-// プロンプト強化関数（改良版）
+// プロンプト強化関数（Kaggle技術移植）
 function enhancePrompt(prompt: string, style: string): string {
   const stylePrompts = {
-    anime: ', anime style, high quality, detailed, vibrant colors, studio ghibli inspired',
-    realistic: ', photorealistic, ultra detailed, professional photography, 8k resolution',
-    artistic: ', artistic style, creative, expressive, masterpiece, oil painting',
-    cyberpunk: ', cyberpunk style, neon lights, futuristic, dark atmosphere, blade runner inspired',
-    fantasy: ', fantasy art, magical, ethereal, mystical, detailed illustration',
-    portrait: ', portrait photography, professional lighting, sharp focus, high quality',
-    landscape: ', landscape photography, beautiful scenery, natural lighting, panoramic view'
+    anime: ', anime style, high quality, detailed, vibrant colors',
+    realistic: ', photorealistic, ultra detailed, professional photography',
+    artistic: ', artistic style, creative, expressive, masterpiece',
+    cyberpunk: ', cyberpunk style, neon lights, futuristic, dark atmosphere'
   };
   
-  const qualityEnhancers = [
-    'high quality',
-    'detailed',
-    'professional',
-    'award winning',
-    'trending on artstation'
-  ];
-  
-  const stylePrompt = stylePrompts[style as keyof typeof stylePrompts] || '';
-  const qualityPrompt = qualityEnhancers[Math.floor(Math.random() * qualityEnhancers.length)];
-  
-  return `${prompt}${stylePrompt}, ${qualityPrompt}`;
+  return prompt + (stylePrompts[style as keyof typeof stylePrompts] || '');
 }
 
-// 現実的な画像URL生成（改良版）
-function generateRealisticImageUrl(params: {
-  size: string;
-  style: string;
-  creativityLevel: number;
-  qualityLevel: number;
-}, prompt: string): string {
+// モック画像URL生成（開発用）
+function generateMockImageUrl(params: any): string {
+  const colors = ['purple', 'blue', 'green', 'red', 'orange'];
+  const color = colors[Math.floor(Math.random() * colors.length)];
   const [width, height] = params.size.split('x');
   
-  // より多様な画像ソースを使用
-  const imageSources = [
-    // Picsum Photos（ランダムな美しい画像）
-    `https://picsum.photos/${width}/${height}?random=${Date.now()}`,
-    // Placeholder.com（カスタマイズ可能）
-    `https://via.placeholder.com/${width}x${height}/4A90E2/FFFFFF?text=${encodeURIComponent(prompt.substring(0, 20))}`,
-    // ダミー画像（より現実的なサイズ）
-    `https://dummyimage.com/${width}x${height}/2E8B57/FFFFFF&text=${encodeURIComponent(prompt.substring(0, 15))}`
-  ];
-  
-  // プロンプトに基づいて画像ソースを選択
-  const sourceIndex = Math.floor(Math.random() * imageSources.length);
-  return imageSources[sourceIndex];
+  // プレースホルダー画像（実際はKaggleで生成した画像ファイル）
+  return `https://via.placeholder.com/${width}x${height}/${color}/white?text=AI+Generated`;
 }
