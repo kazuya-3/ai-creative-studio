@@ -54,13 +54,43 @@ const Download = (props: IconComponentProps) => <Icon name="download" {...props}
 const Palette = (props: IconComponentProps) => <Icon name="palette" {...props} />;
 const Volume2 = (props: IconComponentProps) => <Icon name="volume" {...props} />;
 
+// 型定義
+interface ImageResult {
+  imageUrl: string;
+  metadata?: {
+    prompt?: string;
+    style?: string;
+    size?: string;
+    generationTime?: number;
+  };
+}
+
+interface MusicResult {
+  audioUrl: string;
+  waveform?: number[];
+  metadata?: {
+    generatedTitle?: string;
+    genre?: string;
+    duration?: number;
+    generationTime?: number;
+  };
+}
+
+interface ImageAnalysis {
+  mood: string;
+  brightness: number;
+  emotions?: string[];
+  dominantColors?: string[];
+  complexity?: number;
+}
+
 const AICreativeStudio = () => {
   const [activeTab, setActiveTab] = useState('generate');
   const [isGenerating, setIsGenerating] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [generatedImage, setGeneratedImage] = useState(null);
-  const [generatedMusic, setGeneratedMusic] = useState(null);
-  const [imageAnalysis, setImageAnalysis] = useState(null);
+  const [generatedImage, setGeneratedImage] = useState<ImageResult | null>(null);
+  const [generatedMusic, setGeneratedMusic] = useState<MusicResult | null>(null);
+  const [imageAnalysis, setImageAnalysis] = useState<ImageAnalysis | null>(null);
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false);
   
   // フォーム状態
@@ -460,7 +490,7 @@ const AICreativeStudio = () => {
                             {generatedImage.metadata?.style} • {generatedImage.metadata?.size}
                           </div>
                           <div className="text-xs opacity-50 mt-1">
-                            生成時間: {(generatedImage.metadata?.generationTime / 1000)?.toFixed(1)}秒
+                            生成時間: {generatedImage.metadata?.generationTime ? (generatedImage.metadata.generationTime / 1000).toFixed(1) : 'N/A'}秒
                           </div>
                         </div>
                       </div>
@@ -593,11 +623,17 @@ const AICreativeStudio = () => {
 
       {/* フィードバックボタン */}
       <button
-        onClick={() => setIsFeedbackModalOpen(true)}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-40"
+        onClick={() => {
+          setIsFeedbackModalOpen(true);
+          trackEngagement('feedback_button_clicked', 1);
+        }}
+        className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-110 z-40 backdrop-blur-sm border border-white/20"
         aria-label="フィードバックを送信"
       >
-        <span className="text-2xl">💬</span>
+        <div className="relative">
+          <span className="text-2xl">💬</span>
+          <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-400 rounded-full animate-pulse"></div>
+        </div>
       </button>
 
       {/* フィードバックモーダル */}
