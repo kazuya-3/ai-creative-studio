@@ -300,8 +300,14 @@ const AICreativeStudio = () => {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="px-6 py-3 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-xl border border-yellow-400/30 rounded-2xl animate-pulse shadow-xl">
-                <span className="text-yellow-200 text-sm font-medium">🚧 技術デモ版</span>
+              <div className="px-8 py-4 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-teal-500/20 backdrop-blur-2xl border border-cyan-400/30 rounded-3xl animate-pulse shadow-2xl hover:shadow-cyan-500/25 transition-all duration-500">
+                <div className="flex items-center space-x-3">
+                  <span className="text-2xl">✨</span>
+                  <div>
+                    <div className="text-cyan-100 text-sm font-bold">技術プレビュー版</div>
+                    <div className="text-cyan-200/80 text-xs">AI技術実装中</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -404,14 +410,31 @@ const AICreativeStudio = () => {
                   </div>
 
                   {imageAnalysis && (
-                    <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-xl">
-                      <h4 className="text-cyan-100 font-semibold mb-4 text-lg">画像分析結果</h4>
-                      <div className="text-sm text-cyan-200 space-y-2">
-                        <p><strong>ムード:</strong> {imageAnalysis.mood}</p>
-                        <p><strong>明度:</strong> {Math.round(imageAnalysis.brightness)}%</p>
-                        <p><strong>感情:</strong> {imageAnalysis.emotions?.join(', ')}</p>
-                      </div>
-                    </div>
+                                  <div className="bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-teal-500/10 backdrop-blur-xl rounded-2xl p-6 border border-cyan-400/20 shadow-xl">
+                <h4 className="text-cyan-100 font-semibold mb-4 text-lg flex items-center">
+                  <span className="mr-2">🔬</span>
+                  AI画像分析結果
+                </h4>
+                <div className="text-sm text-cyan-200 space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium">ムード:</span>
+                    <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur-sm rounded-full text-xs">{imageAnalysis.mood}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium">明度:</span>
+                    <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur-sm rounded-full text-xs">{Math.round(imageAnalysis.brightness)}%</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium">感情:</span>
+                    <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur-sm rounded-full text-xs">{imageAnalysis.emotions?.join(', ')}</span>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-cyan-400/20">
+                  <div className="text-center">
+                    <div className="text-cyan-100 text-xs font-medium">🚀 完全版は近日公開予定</div>
+                  </div>
+                </div>
+              </div>
                   )}
                 </div>
               )}
@@ -500,11 +523,14 @@ const AICreativeStudio = () => {
                           <div className="text-xs opacity-50 mt-1">
                             生成時間: {generatedImage.metadata?.generationTime ? (generatedImage.metadata.generationTime / 1000).toFixed(1) : 'N/A'}秒
                           </div>
-                          <div className="mt-3 px-4 py-2 bg-yellow-500/20 backdrop-blur-xl border border-yellow-400/30 rounded-full">
-                            <span className="text-yellow-200 text-xs font-medium">📋 デモ画像表示中</span>
+                          <div className="mt-4 px-6 py-3 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-teal-500/20 backdrop-blur-xl border border-cyan-400/30 rounded-2xl shadow-lg">
+                            <div className="text-center">
+                              <div className="text-cyan-100 text-sm font-bold mb-1">🔬 AI技術実装中</div>
+                              <div className="text-cyan-200/80 text-xs">UI/UXデモンストレーション</div>
+                            </div>
                           </div>
-                          <div className="text-xs text-yellow-100 mt-1">
-                            実際のAI生成は開発中
+                          <div className="mt-3 px-4 py-2 bg-gradient-to-r from-teal-500/20 to-cyan-500/20 backdrop-blur-sm border border-teal-400/30 rounded-full">
+                            <span className="text-teal-200 text-xs font-medium">🚀 完全版は近日公開予定</span>
                           </div>
                         </div>
                       </div>
@@ -516,8 +542,14 @@ const AICreativeStudio = () => {
                     <div className="text-center">
                       <Image className="w-20 h-20 text-cyan-300 mx-auto mb-6" />
                       <p className="text-cyan-200 text-lg mb-4">画像がここに表示されます</p>
-                      <div className="px-4 py-2 bg-yellow-500/20 backdrop-blur-xl border border-yellow-400/30 rounded-full inline-block">
-                        <span className="text-yellow-200 text-sm font-medium">🚧 開発中</span>
+                      <div className="px-6 py-3 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-teal-500/20 backdrop-blur-xl border border-cyan-400/30 rounded-2xl shadow-lg">
+                        <div className="text-center">
+                          <div className="text-cyan-100 text-sm font-bold mb-1">🔬 AI技術実装中</div>
+                          <div className="text-cyan-200/80 text-xs">UI/UXデモンストレーション</div>
+                        </div>
+                      </div>
+                      <div className="mt-3 px-4 py-2 bg-gradient-to-r from-teal-500/20 to-cyan-500/20 backdrop-blur-sm border border-teal-400/30 rounded-full inline-block">
+                        <span className="text-teal-200 text-xs font-medium">🚀 完全版は近日公開予定</span>
                       </div>
                     </div>
                   )}
@@ -541,11 +573,14 @@ const AICreativeStudio = () => {
                           {imageAnalysis && (
                             <p className="text-xs text-cyan-300 mt-1">画像から生成 • {imageAnalysis.mood}ムード</p>
                           )}
-                          <div className="mt-3 px-4 py-2 bg-yellow-500/20 backdrop-blur-xl border border-yellow-400/30 rounded-full inline-block">
-                            <span className="text-yellow-200 text-xs font-medium">🎵 デモプレイヤー</span>
+                          <div className="mt-4 px-6 py-3 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-teal-500/20 backdrop-blur-xl border border-cyan-400/30 rounded-2xl shadow-lg">
+                            <div className="text-center">
+                              <div className="text-cyan-100 text-sm font-bold mb-1">🔬 AI技術実装中</div>
+                              <div className="text-cyan-200/80 text-xs">UI/UXデモンストレーション</div>
+                            </div>
                           </div>
-                          <div className="text-xs text-yellow-100 mt-1">
-                            実際のAI音楽生成は近日実装予定
+                          <div className="mt-3 px-4 py-2 bg-gradient-to-r from-teal-500/20 to-cyan-500/20 backdrop-blur-sm border border-teal-400/30 rounded-full inline-block">
+                            <span className="text-teal-200 text-xs font-medium">🚀 完全版は近日公開予定</span>
                           </div>
                         </div>
                         <button className="p-3 bg-white/20 backdrop-blur-xl hover:bg-white/30 rounded-xl transition-all duration-300 border border-white/20">
@@ -605,8 +640,14 @@ const AICreativeStudio = () => {
                     <div className="text-center py-12">
                       <Music className="w-20 h-20 text-cyan-300 mx-auto mb-6" />
                       <p className="text-cyan-200 text-lg mb-4">音楽がここに表示されます</p>
-                      <div className="px-4 py-2 bg-yellow-500/20 backdrop-blur-xl border border-yellow-400/30 rounded-full inline-block">
-                        <span className="text-yellow-200 text-sm font-medium">🚧 開発中</span>
+                      <div className="px-6 py-3 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-teal-500/20 backdrop-blur-xl border border-cyan-400/30 rounded-2xl shadow-lg">
+                        <div className="text-center">
+                          <div className="text-cyan-100 text-sm font-bold mb-1">🔬 AI技術実装中</div>
+                          <div className="text-cyan-200/80 text-xs">UI/UXデモンストレーション</div>
+                        </div>
+                      </div>
+                      <div className="mt-3 px-4 py-2 bg-gradient-to-r from-teal-500/20 to-cyan-500/20 backdrop-blur-sm border border-teal-400/30 rounded-full inline-block">
+                        <span className="text-teal-200 text-xs font-medium">🚀 完全版は近日公開予定</span>
                       </div>
                     </div>
                   )}
@@ -639,9 +680,12 @@ const AICreativeStudio = () => {
               </div>
               <div className="text-cyan-200 text-sm font-medium">システム状態</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-xl hover:shadow-cyan-500/10 transition-all duration-500">
-              <div className="text-3xl font-bold text-cyan-100 mb-2">技術デモ</div>
-              <div className="text-cyan-200 text-sm font-medium">バージョン</div>
+            <div className="bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-teal-500/20 backdrop-blur-xl rounded-2xl p-6 border border-cyan-400/30 shadow-xl hover:shadow-cyan-500/20 transition-all duration-500">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-cyan-100 mb-2">✨</div>
+                <div className="text-cyan-100 text-lg font-bold mb-1">技術プレビュー版</div>
+                <div className="text-cyan-200/80 text-sm">AI技術実装中</div>
+              </div>
             </div>
           </div>
         </div>
