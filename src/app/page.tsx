@@ -277,81 +277,89 @@ const AICreativeStudio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* 背景装飾 */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-blue-500/5 to-teal-500/5"></div>
+      <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+      
       {/* ヘッダー */}
-      <header className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20"></div>
+      <header className="relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/10 to-blue-600/10 backdrop-blur-sm"></div>
         <div className="relative container mx-auto px-6 py-8">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-white" />
+            <div className="flex items-center space-x-4">
+              <div className="w-14 h-14 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl backdrop-blur-xl border border-white/20">
+                <Sparkles className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-white">AI Creative Studio</h1>
-                <p className="text-purple-200">世界初マルチモーダルAI創作プラットフォーム</p>
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-100 to-blue-100 bg-clip-text text-transparent">
+                  AI Creative Studio
+                </h1>
+                <p className="text-cyan-200/80 text-lg">世界初マルチモーダルAI創作プラットフォーム</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="px-4 py-2 bg-yellow-500/20 border border-yellow-400/30 rounded-lg animate-pulse">
-                <span className="text-yellow-300 text-sm font-medium">🚧 技術デモ版</span>
+              <div className="px-6 py-3 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-xl border border-yellow-400/30 rounded-2xl animate-pulse shadow-xl">
+                <span className="text-yellow-200 text-sm font-medium">🚧 技術デモ版</span>
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-6 py-8 relative z-10">
         <div className="grid lg:grid-cols-12 gap-8">
           {/* メインコントロールパネル */}
           <div className="lg:col-span-4">
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 p-6">
-              <div className="flex space-x-2 mb-6">
+            <div className="bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500">
+              {/* フローティングガラスタブ */}
+              <div className="flex space-x-3 mb-8 p-2 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10">
                 <button
                   onClick={() => setActiveTab('generate')}
-                  className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all ${
+                  className={`flex-1 py-4 px-6 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${
                     activeTab === 'generate'
-                      ? 'bg-purple-500 text-white shadow-lg'
-                      : 'text-purple-200 hover:bg-white/10'
+                      ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-xl'
+                      : 'text-cyan-200 hover:bg-white/20 backdrop-blur-sm'
                   }`}
                 >
-                  <Image className="w-4 h-4 inline mr-2" />
+                  <Image className="w-5 h-5 inline mr-3" />
                   画像生成
                 </button>
                 <button
                   onClick={() => setActiveTab('convert')}
-                  className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all ${
+                  className={`flex-1 py-4 px-6 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${
                     activeTab === 'convert'
-                      ? 'bg-purple-500 text-white shadow-lg'
-                      : 'text-purple-200 hover:bg-white/10'
+                      ? 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-xl'
+                      : 'text-cyan-200 hover:bg-white/20 backdrop-blur-sm'
                   }`}
                 >
-                  <Music className="w-4 h-4 inline mr-2" />
+                  <Music className="w-5 h-5 inline mr-3" />
                   音楽変換
                 </button>
               </div>
 
               {activeTab === 'generate' && (
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div>
-                    <label className="block text-white font-medium mb-2">
+                    <label className="block text-cyan-100 font-semibold mb-3 text-lg">
                       プロンプト
                     </label>
                     <textarea
                       value={prompt}
                       onChange={(e) => setPrompt(e.target.value)}
-                      className="w-full h-24 px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-purple-200 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full h-28 px-6 py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl text-cyan-100 placeholder-cyan-200/50 resize-none focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400/50 transition-all duration-300"
                       placeholder="美しい夕日の風景、アニメスタイル、高品質..."
                     />
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-white font-medium mb-2">スタイル</label>
+                      <label className="block text-cyan-100 font-semibold mb-3">スタイル</label>
                       <select 
                         value={style}
                         onChange={(e) => setStyle(e.target.value)}
-                        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        className="w-full px-4 py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl text-cyan-100 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400/50 transition-all duration-300"
                       >
                         <option value="anime">アニメ</option>
                         <option value="realistic">リアル</option>
@@ -361,11 +369,11 @@ const AICreativeStudio = () => {
                     </div>
                     
                     <div>
-                      <label className="block text-white font-medium mb-2">サイズ</label>
+                      <label className="block text-cyan-100 font-semibold mb-3">サイズ</label>
                       <select 
                         value={size}
                         onChange={(e) => setSize(e.target.value)}
-                        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        className="w-full px-4 py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl text-cyan-100 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400/50 transition-all duration-300"
                       >
                         <option value="512x512">512×512</option>
                         <option value="768x768">768×768</option>
@@ -377,15 +385,15 @@ const AICreativeStudio = () => {
               )}
 
               {activeTab === 'convert' && (
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div>
-                    <label className="block text-white font-medium mb-2">
+                    <label className="block text-cyan-100 font-semibold mb-3 text-lg">
                       音楽ジャンル
                     </label>
                     <select 
                       value={genre}
                       onChange={(e) => setGenre(e.target.value)}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="w-full px-4 py-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl text-cyan-100 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400/50 transition-all duration-300"
                     >
                       <option value="ambient">アンビエント</option>
                       <option value="electronic">エレクトロニック</option>
@@ -396,9 +404,9 @@ const AICreativeStudio = () => {
                   </div>
 
                   {imageAnalysis && (
-                    <div className="bg-white/5 rounded-xl p-4">
-                      <h4 className="text-white font-medium mb-2">画像分析結果</h4>
-                      <div className="text-sm text-purple-200 space-y-1">
+                    <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-xl">
+                      <h4 className="text-cyan-100 font-semibold mb-4 text-lg">画像分析結果</h4>
+                      <div className="text-sm text-cyan-200 space-y-2">
                         <p><strong>ムード:</strong> {imageAnalysis.mood}</p>
                         <p><strong>明度:</strong> {Math.round(imageAnalysis.brightness)}%</p>
                         <p><strong>感情:</strong> {imageAnalysis.emotions?.join(', ')}</p>
@@ -411,7 +419,7 @@ const AICreativeStudio = () => {
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating}
-                className="w-full mt-6 py-4 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 disabled:from-gray-500 disabled:to-gray-600 text-white font-medium rounded-xl shadow-lg transition-all transform hover:scale-105 disabled:scale-100"
+                className="w-full mt-8 py-5 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 disabled:from-gray-500 disabled:to-gray-600 text-white font-semibold rounded-2xl shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 transform hover:scale-105 disabled:scale-100 backdrop-blur-xl border border-white/20"
               >
                 {isGenerating ? (
                   <div className="flex items-center justify-center">
@@ -428,40 +436,40 @@ const AICreativeStudio = () => {
             </div>
 
             {/* 高度な設定 */}
-            <div className="mt-6 bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 p-6">
-              <h3 className="text-white font-medium mb-4 flex items-center">
-                <Palette className="w-5 h-5 mr-2" />
+            <div className="mt-8 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500">
+              <h3 className="text-cyan-100 font-semibold mb-6 flex items-center text-lg">
+                <Palette className="w-6 h-6 mr-3" />
                 高度な設定
               </h3>
               
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div>
-                  <label className="block text-white text-sm mb-2">クリエイティブ度: {creativityLevel}%</label>
+                  <label className="block text-cyan-100 font-medium mb-3">クリエイティブ度: {creativityLevel}%</label>
                   <input 
                     type="range" 
                     min="0" 
                     max="100" 
                     value={creativityLevel}
-                                         onChange={(e) => setCreativityLevel(Number(e.target.value))}
-                    className="w-full" 
+                    onChange={(e) => setCreativityLevel(Number(e.target.value))}
+                    className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider" 
                   />
-                  <div className="flex justify-between text-xs text-purple-200 mt-1">
+                  <div className="flex justify-between text-sm text-cyan-200 mt-2">
                     <span>安全</span>
                     <span>創造的</span>
                   </div>
                 </div>
                 
                 <div>
-                  <label className="block text-white text-sm mb-2">品質: {qualityLevel}%</label>
+                  <label className="block text-cyan-100 font-medium mb-3">品質: {qualityLevel}%</label>
                   <input 
                     type="range" 
                     min="0" 
                     max="100" 
                     value={qualityLevel}
-                                         onChange={(e) => setQualityLevel(Number(e.target.value))}
-                    className="w-full" 
+                    onChange={(e) => setQualityLevel(Number(e.target.value))}
+                    className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider" 
                   />
-                  <div className="flex justify-between text-xs text-purple-200 mt-1">
+                  <div className="flex justify-between text-sm text-cyan-200 mt-2">
                     <span>高速</span>
                     <span>最高品質</span>
                   </div>
@@ -472,18 +480,18 @@ const AICreativeStudio = () => {
 
           {/* 結果表示エリア */}
           <div className="lg:col-span-8">
-            <div className="grid gap-6">
+            <div className="grid gap-8">
               {/* 画像結果 */}
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 p-6">
-                <h3 className="text-white font-medium mb-4 flex items-center">
-                  <Image className="w-5 h-5 mr-2" />
+              <div className="bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500">
+                <h3 className="text-cyan-100 font-semibold mb-6 flex items-center text-xl">
+                  <Image className="w-6 h-6 mr-3" />
                   生成画像
                 </h3>
                 
-                <div className="aspect-square bg-white/5 rounded-xl border-2 border-dashed border-white/20 flex items-center justify-center">
+                <div className="aspect-square bg-white/5 backdrop-blur-xl rounded-2xl border-2 border-dashed border-white/20 flex items-center justify-center">
                   {generatedImage ? (
                     <div className="relative w-full h-full">
-                      <div className="w-full h-full bg-gradient-to-br from-purple-400 to-blue-400 rounded-xl flex items-center justify-center">
+                      <div className="w-full h-full bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl">
                         <div className="text-center text-white">
                           <div className="text-lg font-medium">{generatedImage.metadata?.prompt?.slice(0, 50)}...</div>
                           <div className="text-sm opacity-75 mt-2">
@@ -492,24 +500,24 @@ const AICreativeStudio = () => {
                           <div className="text-xs opacity-50 mt-1">
                             生成時間: {generatedImage.metadata?.generationTime ? (generatedImage.metadata.generationTime / 1000).toFixed(1) : 'N/A'}秒
                           </div>
-                          <div className="mt-3 px-3 py-1 bg-yellow-500/20 border border-yellow-400/30 rounded-full">
-                            <span className="text-yellow-300 text-xs font-medium">📋 デモ画像表示中</span>
+                          <div className="mt-3 px-4 py-2 bg-yellow-500/20 backdrop-blur-xl border border-yellow-400/30 rounded-full">
+                            <span className="text-yellow-200 text-xs font-medium">📋 デモ画像表示中</span>
                           </div>
-                          <div className="text-xs text-yellow-200 mt-1">
+                          <div className="text-xs text-yellow-100 mt-1">
                             実際のAI生成は開発中
                           </div>
                         </div>
                       </div>
-                      <button className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors">
-                        <Download className="w-4 h-4 text-white" />
+                      <button className="absolute top-4 right-4 p-3 bg-white/20 backdrop-blur-xl hover:bg-white/30 rounded-xl transition-all duration-300 border border-white/20">
+                        <Download className="w-5 h-5 text-white" />
                       </button>
                     </div>
                   ) : (
                     <div className="text-center">
-                      <Image className="w-16 h-16 text-purple-300 mx-auto mb-4" />
-                      <p className="text-purple-200">画像がここに表示されます</p>
-                      <div className="mt-2 px-3 py-1 bg-yellow-500/20 border border-yellow-400/30 rounded-full inline-block">
-                        <span className="text-yellow-300 text-xs font-medium">🚧 開発中</span>
+                      <Image className="w-20 h-20 text-cyan-300 mx-auto mb-6" />
+                      <p className="text-cyan-200 text-lg mb-4">画像がここに表示されます</p>
+                      <div className="px-4 py-2 bg-yellow-500/20 backdrop-blur-xl border border-yellow-400/30 rounded-full inline-block">
+                        <span className="text-yellow-200 text-sm font-medium">🚧 開発中</span>
                       </div>
                     </div>
                   )}
@@ -517,76 +525,76 @@ const AICreativeStudio = () => {
               </div>
 
               {/* 音楽プレイヤー */}
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 p-6">
-                <h3 className="text-white font-medium mb-4 flex items-center">
-                  <Music className="w-5 h-5 mr-2" />
+              <div className="bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500">
+                <h3 className="text-cyan-100 font-semibold mb-6 flex items-center text-xl">
+                  <Music className="w-6 h-6 mr-3" />
                   生成音楽
                 </h3>
                 
-                <div className="bg-white/5 rounded-xl p-6">
+                <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
                   {generatedMusic ? (
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h4 className="text-white font-medium">{generatedMusic.metadata?.generatedTitle || 'Generated Track'}</h4>
-                          <p className="text-purple-200 text-sm">{generatedMusic.metadata?.genre} • {generatedMusic.metadata?.duration}秒</p>
+                          <h4 className="text-cyan-100 font-semibold text-lg">{generatedMusic.metadata?.generatedTitle || 'Generated Track'}</h4>
+                          <p className="text-cyan-200 text-sm">{generatedMusic.metadata?.genre} • {generatedMusic.metadata?.duration}秒</p>
                           {imageAnalysis && (
-                            <p className="text-xs text-purple-300 mt-1">画像から生成 • {imageAnalysis.mood}ムード</p>
+                            <p className="text-xs text-cyan-300 mt-1">画像から生成 • {imageAnalysis.mood}ムード</p>
                           )}
-                          <div className="mt-2 px-3 py-1 bg-yellow-500/20 border border-yellow-400/30 rounded-full inline-block">
-                            <span className="text-yellow-300 text-xs font-medium">🎵 デモプレイヤー</span>
+                          <div className="mt-3 px-4 py-2 bg-yellow-500/20 backdrop-blur-xl border border-yellow-400/30 rounded-full inline-block">
+                            <span className="text-yellow-200 text-xs font-medium">🎵 デモプレイヤー</span>
                           </div>
-                          <div className="text-xs text-yellow-200 mt-1">
+                          <div className="text-xs text-yellow-100 mt-1">
                             実際のAI音楽生成は近日実装予定
                           </div>
                         </div>
-                        <button className="p-2 bg-white/20 hover:bg-white/30 rounded-lg transition-colors">
-                          <Download className="w-4 h-4 text-white" />
+                        <button className="p-3 bg-white/20 backdrop-blur-xl hover:bg-white/30 rounded-xl transition-all duration-300 border border-white/20">
+                          <Download className="w-5 h-5 text-white" />
                         </button>
                       </div>
                       
-                      <div className="flex items-center space-x-4">
+                      <div className="flex items-center space-x-6">
                         <button
                           onClick={togglePlayback}
-                          className="w-12 h-12 bg-purple-500 hover:bg-purple-600 rounded-full flex items-center justify-center transition-colors"
+                          className="w-14 h-14 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 rounded-full flex items-center justify-center transition-all duration-300 shadow-xl hover:shadow-cyan-500/25 transform hover:scale-105"
                         >
                           {isPlaying ? (
-                            <Pause className="w-5 h-5 text-white" />
+                            <Pause className="w-6 h-6 text-white" />
                           ) : (
-                            <Play className="w-5 h-5 text-white ml-1" />
+                            <Play className="w-6 h-6 text-white ml-1" />
                           )}
                         </button>
                         
                         <div className="flex-1">
-                          <div className="h-2 bg-white/20 rounded-full">
-                            <div className="w-1/3 h-full bg-gradient-to-r from-purple-400 to-blue-400 rounded-full"></div>
+                          <div className="h-3 bg-white/20 backdrop-blur-sm rounded-full">
+                            <div className="w-1/3 h-full bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full shadow-lg"></div>
                           </div>
-                          <div className="flex justify-between text-xs text-purple-200 mt-1">
+                          <div className="flex justify-between text-sm text-cyan-200 mt-2">
                             <span>0:00</span>
                             <span>{generatedMusic.metadata?.duration || 30}秒</span>
                           </div>
                         </div>
                         
-                        <Volume2 className="w-5 h-5 text-purple-300" />
+                        <Volume2 className="w-6 h-6 text-cyan-300" />
                       </div>
                       
                       {/* 波形ビジュライザー */}
-                      <div className="grid grid-cols-32 gap-1">
+                      <div className="grid grid-cols-32 gap-2 mt-6">
                         {generatedMusic.waveform?.slice(0, 32).map((amplitude, i) => (
                           <div
                             key={i}
-                            className="bg-gradient-to-t from-purple-500/60 to-blue-500/60 rounded-sm transition-all duration-300"
+                            className="bg-gradient-to-t from-cyan-400/80 to-blue-500/80 rounded-md transition-all duration-300 shadow-lg"
                             style={{
-                              height: `${amplitude * 32 + 8}px`,
+                              height: `${amplitude * 40 + 12}px`,
                               animationDelay: `${i * 0.1}s`
                             }}
                           />
                         )) || Array.from({length: 32}, (_, i) => (
                           <div
                             key={i}
-                            className="bg-gradient-to-t from-purple-500/60 to-blue-500/60 rounded-sm"
+                            className="bg-gradient-to-t from-cyan-400/80 to-blue-500/80 rounded-md shadow-lg"
                             style={{
-                              height: `${Math.random() * 32 + 8}px`,
+                              height: `${Math.random() * 40 + 12}px`,
                               animationDelay: `${i * 0.1}s`
                             }}
                           />
@@ -594,11 +602,11 @@ const AICreativeStudio = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="text-center py-8">
-                      <Music className="w-16 h-16 text-purple-300 mx-auto mb-4" />
-                      <p className="text-purple-200">音楽がここに表示されます</p>
-                      <div className="mt-2 px-3 py-1 bg-yellow-500/20 border border-yellow-400/30 rounded-full inline-block">
-                        <span className="text-yellow-300 text-xs font-medium">🚧 開発中</span>
+                    <div className="text-center py-12">
+                      <Music className="w-20 h-20 text-cyan-300 mx-auto mb-6" />
+                      <p className="text-cyan-200 text-lg mb-4">音楽がここに表示されます</p>
+                      <div className="px-4 py-2 bg-yellow-500/20 backdrop-blur-xl border border-yellow-400/30 rounded-full inline-block">
+                        <span className="text-yellow-200 text-sm font-medium">🚧 開発中</span>
                       </div>
                     </div>
                   )}
@@ -610,30 +618,30 @@ const AICreativeStudio = () => {
       </div>
 
       {/* フッター統計 */}
-      <footer className="mt-16 bg-white/5 backdrop-blur-lg border-t border-white/10">
-        <div className="container mx-auto px-6 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div>
-              <div className="text-2xl font-bold text-white mb-1">
+      <footer className="mt-20 bg-white/10 backdrop-blur-2xl border-t border-white/20 relative z-10">
+        <div className="container mx-auto px-6 py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-xl hover:shadow-cyan-500/10 transition-all duration-500">
+              <div className="text-3xl font-bold text-cyan-100 mb-2">
                 {generatedImage ? '1' : '0'}
               </div>
-              <div className="text-purple-200 text-sm">デモ画像数</div>
+              <div className="text-cyan-200 text-sm font-medium">デモ画像数</div>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-white mb-1">
+            <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-xl hover:shadow-cyan-500/10 transition-all duration-500">
+              <div className="text-3xl font-bold text-cyan-100 mb-2">
                 {generatedMusic ? '1' : '0'}
               </div>
-              <div className="text-purple-200 text-sm">デモ音楽数</div>
+              <div className="text-cyan-200 text-sm font-medium">デモ音楽数</div>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-white mb-1">
+            <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-xl hover:shadow-cyan-500/10 transition-all duration-500">
+              <div className="text-3xl font-bold text-cyan-100 mb-2">
                 {isGenerating ? 'デモ中' : '待機中'}
               </div>
-              <div className="text-purple-200 text-sm">システム状態</div>
+              <div className="text-cyan-200 text-sm font-medium">システム状態</div>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-white mb-1">技術デモ</div>
-              <div className="text-purple-200 text-sm">バージョン</div>
+            <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-xl hover:shadow-cyan-500/10 transition-all duration-500">
+              <div className="text-3xl font-bold text-cyan-100 mb-2">技術デモ</div>
+              <div className="text-cyan-200 text-sm font-medium">バージョン</div>
             </div>
           </div>
         </div>
@@ -645,12 +653,12 @@ const AICreativeStudio = () => {
           setIsFeedbackModalOpen(true);
           trackEngagement('feedback_button_clicked', 1);
         }}
-        className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white rounded-full shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-110 z-40 backdrop-blur-sm border border-white/20"
+        className="fixed bottom-8 right-8 w-18 h-18 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white rounded-full shadow-2xl hover:shadow-cyan-500/25 transition-all duration-300 transform hover:scale-110 z-40 backdrop-blur-xl border border-white/20"
         aria-label="フィードバックを送信"
       >
         <div className="relative">
-          <span className="text-2xl">💬</span>
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-400 rounded-full animate-pulse"></div>
+          <span className="text-3xl">💬</span>
+          <div className="absolute -top-2 -right-2 w-4 h-4 bg-red-400 rounded-full animate-pulse shadow-lg"></div>
         </div>
       </button>
 
