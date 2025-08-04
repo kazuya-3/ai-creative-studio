@@ -24,13 +24,13 @@ export const initGA = () => {
   window.gtag('js', new Date());
   window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
     page_title: 'AI Creative Studio',
-    page_location: window.location.href,
+    page_location: typeof window.location !== 'undefined' ? window.location.href : '',
   });
 };
 
 // ページビュー追跡
 export const trackPageView = (url: string) => {
-  if (typeof window !== 'undefined' && window.gtag) {
+  if (typeof window !== 'undefined' && window.gtag && typeof window.location !== 'undefined') {
     window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
       page_path: url,
     });

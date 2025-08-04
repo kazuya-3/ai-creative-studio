@@ -26,7 +26,7 @@ export const logError = async (error: Error | string, context: string) => {
       message: errorMessage,
       stack: errorStack,
       context,
-      url: typeof window !== 'undefined' ? window.location.href : '',
+      url: typeof window !== 'undefined' && typeof window.location !== 'undefined' ? window.location.href : '',
       userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : '',
       timestamp: new Date().toISOString(),
       sessionId: getSessionId(),

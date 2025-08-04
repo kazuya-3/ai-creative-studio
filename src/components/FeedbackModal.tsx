@@ -37,7 +37,7 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
           email: email.trim(),
           timestamp: new Date().toISOString(),
           userAgent: navigator.userAgent,
-          url: window.location.href,
+          url: typeof window !== 'undefined' && typeof window.location !== 'undefined' ? window.location.href : '',
         }),
       });
 

@@ -262,7 +262,9 @@ const AICreativeStudio = () => {
   // 初期化
   useEffect(() => {
     // ページビュー追跡
-    trackPageView(window.location.pathname);
+    if (typeof window !== 'undefined') {
+      trackPageView(window.location.pathname);
+    }
     
     // エラーハンドラー設定
     setupGlobalErrorHandler();

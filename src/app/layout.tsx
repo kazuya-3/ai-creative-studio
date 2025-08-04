@@ -100,7 +100,7 @@ export default function RootLayout({
               });
 
               // エラーハンドリング（Google Analyticsは@next/third-partiesで管理）
-              if (typeof window !== 'undefined') {
+              if (typeof window !== 'undefined' && typeof window.location !== 'undefined') {
                 // 追加のカスタム設定があればここに記述
               }
             `,
